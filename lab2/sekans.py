@@ -1,5 +1,5 @@
 import math
-from value import Value
+from main import Value
  
 class Sekans(Value):
     def ratio_of_angles(self):
