@@ -1,6 +1,7 @@
 # Класс
 class Math:
     # Конструктор
+    # self — это ссылка на создаваемый в памяти компьютера объект
     def __init__(self,a,b,c,d):
         self.a = a
         self.b = b
@@ -30,10 +31,10 @@ class Math:
         return f"\nМаксимальное число = {maximum}"
 
 # Ввод переменных
-a  = float(input("Введите число a: "))
-b  = float(input("Введите число b: "))
-c  = float(input("Введите число c: "))
-d  = float(input("Введите число d: "))
+a = float(input("Введите число a: ") or 0)
+b = float(input("Введите число b: ") or 0)
+c = float(input("Введите число c: ") or 0)
+d = float(input("Введите число d: ") or 0)
 
 # Создание объекта
 math = Math(a,b,c,d)
