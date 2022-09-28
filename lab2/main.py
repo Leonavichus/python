@@ -19,12 +19,15 @@ if __name__ == '__main__':
     # Ввод данных
     a  = float(input("Введите занчение: ") or 1)
     value  = Value(a)
+    b = value.corner
+    vehicles = [Sekans(b), Koseksns(b), Kotangens(b)]
     if (a != 0):
         # Создание экземпляров класса
-        sekans = Sekans(value.corner)
-        koseksns = Koseksns(value.corner)
-        kotangens = Kotangens(value.corner)
-        # Вывод данных
-        print(value, sekans.ratio_of_angles(),koseksns.ratio_of_angles(), kotangens.ratio_of_angles())
+        for o in vehicles:
+            try:
+                # Вывод данных
+                print(o.ratio_of_angles())
+            except NotImplementedError:
+                print("Метод не реализован")
     else:
         print("Ноль нельзя!")
