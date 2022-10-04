@@ -1,12 +1,12 @@
 import math
-from main import Value
+from main import Corner
 from abc import ABC, abstractmethod
  
-class Koseksns(Value):
+class Koseksns(Corner):
     # Функция Косеканс
     def ratio_of_angles(self):
         koseksns = 1/math.sin(self.corner)
-        return f"\nКосеканс = {koseksns}"
+        return f"Косеканс = {koseksns}"
 
     # Виртуальный метод
     @abstractmethod

@@ -1,4 +1,4 @@
-class Value:
+class Corner:
     # Конструктор
     def __init__(self, corner):
         self.corner = corner
@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     # Ввод данных
     a  = float(input("Введите занчение: ") or 1)
-    value  = Value(a)
+    value  = Corner(a)
     b = value.corner
     vehicles = [Sekans(b), Koseksns(b), Kotangens(b)]
     if (a != 0):
