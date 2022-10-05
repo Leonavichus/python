@@ -7,7 +7,9 @@ V = 10 # паролей в минуту (скорость перебора па�
 T = 1 # неделя (срок действия)
 Vt = V*60*24*7 # паролей в неделю
 S1=(Vt*T)/P
-strPass = string.ascii_letters + string.punctuation + string.octdigits
+power = string.ascii_letters + string.punctuation + string.octdigits
+number = int(input('Мощность = '))
+strPass = power[:number]
 A = len(strPass)
 L = 0
 Al = pow(A, L)
