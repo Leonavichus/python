@@ -9,14 +9,15 @@ Vt = V*60*24*7 # паролей в неделю
 S1=(Vt*T)/P
 strPass = string.ascii_letters + string.punctuation + string.octdigits
 A = len(strPass)
-L = 6
+L = 0
 Al = pow(A, L)
+while(S1>Al):
+    L+=1
+    Al = pow(A, L)
 if(S1<Al):
     print(f'Нижняя граница S* = {int(S1)}')
-else:
-    print('Сделать пароль длиннее')
-
-password =''
+    print(f'Длина пароля L = {L}')
+password = ''
 for i in range(L):
     password += random.choice(strPass)
 print(f'Пароль = {password}')
