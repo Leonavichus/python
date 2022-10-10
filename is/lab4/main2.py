@@ -1,6 +1,29 @@
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP, AES
 import os
+import rsa
+
+(publicKey, privateKey) = rsa.newkeys(1024)
+
+# Генерация ключей и сохранение
+pub = publicKey.save_pkcs1()
+with open('public.pem', 'wb') as pubfile:
+    pubfile.write(pub)
+    pubfile.close()
+
+pri = privateKey.save_pkcs1()
+with open('private.pem', 'wb') as prifile:
+    prifile.write(pri)
+    prifile.close()
+
+# Загрузка ключей
+with open('public.pem') as publickfile:
+    p = publickfile.read()
+    publicKey = rsa.PublicKey.load_pkcs1(p)
+
+with open('private.pem') as privatefile:
+    p = privatefile.read()
+    privateKey = rsa.PrivateKey.load_pkcs1(p)
 
 def encrypt(dataFile, publicKeyFile):
     # считывание данных из файла
