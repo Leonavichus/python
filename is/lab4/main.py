@@ -1,5 +1,4 @@
 import rsa
-import pybase64
 
 # Генерация ключей 
 (publicKey, privateKey) = rsa.newkeys(1024)
