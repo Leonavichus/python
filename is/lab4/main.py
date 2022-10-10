@@ -15,7 +15,7 @@ decMessage = rsa.decrypt(encMessage, privateKey).decode()
 # Вывод 
 print("Расшифрованная строка: ", decMessage)
 
-# Сгенерируйте пару ключей и сохраните
+# Генерация ключей и сохранение
 pub = publicKey.save_pkcs1()
 with open('public.pem', 'wb') as pubfile:
     pubfile.write(pub)
@@ -26,7 +26,7 @@ with open('private.pem', 'wb') as prifile:
     prifile.write(pri)
     prifile.close()
 
-# Загрузить открытый ключ и секретный ключ
+# Загрузка ключей
 with open('public.pem') as publickfile:
     p = publickfile.read()
     publicKey = rsa.PublicKey.load_pkcs1(p)
