@@ -13,12 +13,6 @@ def newkeys(keysize):
    private, public = key, key.publickey()
    return public, private
 
-def importKey(externKey):
-   return RSA.importKey(externKey)
-
-def getpublickey(priv_key):
-   return priv_key.publickey()
-
 # шифрование
 def encrypt(message, pub_key):
    cipher = PKCS1_OAEP.new(pub_key)
