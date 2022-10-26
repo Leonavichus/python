@@ -1,6 +1,5 @@
 from dataclasses import dataclass, asdict, astuple
 import csv
-import os.path
 
 # Классы
 @dataclass
