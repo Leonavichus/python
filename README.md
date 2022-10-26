@@ -4,18 +4,18 @@
 
 | Лаба          | Выполнено     | Лаба          | Выполнено     |
 | ------------- |:-------------:|:-------------:|:-------------:|
-| 1             | :heavy_check_mark:|6             | :x:           |
-| 2             | :heavy_check_mark:|7             | :x:           |
+| 1             |:heavy_check_mark:|6             | :x:           |
+| 2             |:heavy_check_mark:|7             | :x:           |
 | 3             | :x:           |8             | :x:           |
 | 4             | :x:           |9             | :x:           |
-| 5             | :x:           |10             | :x:           |
+| 5             |:heavy_check_mark:|10             | :x:          |
 
 Информационная безопасность и защита информации
 
 | Лаба          | Выполнено     |
 | ------------- |:-------------:|
-| 1             | :heavy_check_mark:|
-| 2             | :heavy_check_mark:|
-| 3             | :heavy_check_mark:|
-| 4             | :heavy_check_mark:|
-| 5             | :heavy_check_mark:|
+| 1             |:heavy_check_mark:|
+| 2             |:heavy_check_mark:|
+| 3             |:heavy_check_mark:|
+| 4             |:heavy_check_mark:|
+| 5             |:heavy_check_mark:|
