@@ -54,6 +54,7 @@ def read(object):
 def create(number, object, obj):
     id = int(input('Id: '))
     name = str(input('Название: '))
+    # Добавление объекта в конец массива
     if(number == 2 or number == 3):
         id_city = int(input('Id города: '))
         object.append(obj(id, name, id_city))
@@ -62,10 +63,12 @@ def create(number, object, obj):
 
 # Изменение объекта класса
 def edit(number, object):
+    # Вывод элементов для изменения
     for g in range(len(object)):
         print(f'{g}. - {asdict(object[g])}')
     selectListObject = int(input(f'Выберете элемент.\n'))
     if selectListObject >= 0 and selectListObject < len(object):
+        # Присвоение новых значений
         if(number == 2 or number == 3):
             editValue = int(input(f'Изменить:\n'
             '1 - Id\n'
@@ -95,10 +98,12 @@ def edit(number, object):
 
 #Удаление объекта класса
 def delete(object):
+    # Вывод элементов для удаления
     for g in range(len(object)):
         print(f'{g}. - {asdict(object[g])}')
     selectListObject = int(input(f'Выберете элемент для удаления.\n'))
     if selectListObject >= 0 and selectListObject < len(object):
+        # Удаление элемента
         object.pop(selectListObject)
     else:
         print('Такого элемента нет')
@@ -184,16 +189,20 @@ while(not exit):
         elif saveObject == 3:
             saveFile('streets', street, saveObject)
     elif start == 7:
+        # Вывод стран
         for g in range(len(country)):
             print(f'{g}. - {country[g].name}')
             selectListObject = int(input(f'Выберете страну.\n'))
+            # Вывод списка городов
             for element in city:
                 if(element.id == country[selectListObject].id_city):
                     print(element.name)
     elif start == 8:
+        # Вывод городов
         for g in range(len(city)):
             print(f'{g}. - {city[g].name}')
             selectListObject = int(input(f'Выберете город.\n'))
+            # Вывод количества городов
             for element in street:
                 if(element.id_city == city[selectListObject].id):
                     print(f'Количество городов: {len(element.name)}')

@@ -63,16 +63,21 @@ def create(number, obj, names):
             age = int(input('Возвраст: '))
             id_department = int(input('Id кафедры: '))
             id_post = int(input('Id должности: '))
+            # Запись объекта в файл
             pickle.dump(obj(id, name, age, id_department,id_post), f, protocol=pickle.HIGHEST_PROTOCOL)
         elif(number == 3):
             institute = str(input('Институт: '))
+            # Запись объекта в файл
             pickle.dump(obj(id, name, institute), f, protocol=pickle.HIGHEST_PROTOCOL)
         else:
+            # Запись объекта в файл
             pickle.dump(obj(id, name), f, protocol=pickle.HIGHEST_PROTOCOL)
 
+# Заполенние массивов
 add('teacher', teacher)
 add('department', department)
 add('post', post)
+
 exit = 0
 while(not exit):
     start = int(input(f'Возможности:\n'
