@@ -23,6 +23,7 @@ class Street:
 city = []
 country = []
 street = []
+sumStreet = []
 
 # Чтение из файла
 def readFile(names):
@@ -205,6 +206,7 @@ while(not exit):
             # Вывод количества городов
             for element in street:
                 if(element.id_city == city[selectListObject].id):
-                    print(f'Количество городов: {len(element.name)}')
+                    sumStreet.append(element.name)
+            print(f'Количество улиц в городе: {len(sumStreet)}')
     elif start == 9:
         exit = 1
