@@ -4,18 +4,7 @@ import copy
 from random import randint
 
 # Сортировка векторов
-def selection_sort(myListOfVectors, number):
-    list = []
-    # Расчет длинны вектора
-    # if number == 2:
-    #     for i in range(len(myListOfVectors)):
-    #         for j in range(len(myListOfVectors[i]) - 1):
-    #             list.append(math.sqrt(myListOfVectors[i][j] * myListOfVectors[i][j] + myListOfVectors[i][j+1] * myListOfVectors[i][j+1]))
-    # elif number == 3:
-    #     for i in range(len(myListOfVectors)):
-    #         for j in range(len(myListOfVectors[i]) - 2):
-    #             list.append(math.sqrt(myListOfVectors[i][j] * myListOfVectors[i][j] + myListOfVectors[i][j+1] * myListOfVectors[i][j+1] + myListOfVectors[i][j+2] * myListOfVectors[i][j+2]))
-
+def selection_sort(myListOfVectors):
     # Сортировка выбором
     for i in range(0, len(myListOfVectors) - 1):
         smallest = i
@@ -44,7 +33,7 @@ for i in range(1, n + 1):
 # Сортировка и вывод отсортированного списка векторов
 myListOfVectors2 = copy.copy(myListOfVectors)
 print(myListOfVectors)
-selection_sort(myListOfVectors, category)
+selection_sort(myListOfVectors)
 b = sorted(myListOfVectors2)
 print(f'Ручная сортировка = {myListOfVectors}')
 print(f'Сортировка библиотеки = {b}')

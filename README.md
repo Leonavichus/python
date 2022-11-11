@@ -5,10 +5,10 @@
 | Лаба          | Выполнено        | Лаба         | Выполнено        |
 | ------------- |:----------------:|:------------:|:----------------:|
 | 1             |:heavy_check_mark:|6             |:heavy_check_mark:|
-| 2             |:heavy_check_mark:|7             | :x:              |
-| 3             |:heavy_check_mark:|8             | :x:              |
-| 4             |:heavy_check_mark:|9             | :x:              |
-| 5             |:heavy_check_mark:|10            | :x:              |
+| 2             |:heavy_check_mark:|7             |:x:               |
+| 3             |:heavy_check_mark:|10            |:x:               |
+| 4             |:heavy_check_mark:|
+| 5             |:heavy_check_mark:|
 
 Информационная безопасность и защита информации
 
@@ -19,6 +19,7 @@
 | 3             |:heavy_check_mark:|
 | 4             |:heavy_check_mark:|
 | 5             |:heavy_check_mark:|
+| 8-9           |:x:               |
 
 Интеллектуальные информационные системы
 
@@ -27,6 +28,6 @@
 | 1             |:heavy_check_mark:|
 | 2             |:heavy_check_mark:|
 | 3             |:heavy_check_mark:|
-| 4             | :x:              |
-| 5             | :x:              |
-| 6             | :x:              |
+| 4             |:x:               |
+| 5             |:x:               |
+| 6             |:x:               |
