@@ -40,6 +40,13 @@ def get_ru(t: dt) -> str:
     locale.setlocale(locale.LC_ALL, loc)
     return val
 
+def pprint64(value):
+    printArray = np.unpackbits(np.frombuffer(value, dtype=np.uint8)).reshape((8, 8))
+    print(*printArray, sep='\n')
+
+def pprint128(value):
+    printArray = np.unpackbits(np.frombuffer(value, dtype=np.uint8)).reshape((16, 8))
+    print(*printArray, sep='\n')
 
 print('ШАГ 1')
 cube = np.array([[[7, 8], [5, 6]], [[1, 2], [3, 4]]])
@@ -119,30 +126,36 @@ print(*date_key_bits, sep='\n')
 print('\n----------------\n')
 
 print('ШАГ 4')
+k1r = np.packbits(date_key_bits.reshape(8 * 8))
 print(f'Ключ первого раунда K1r')
-k1r = date_key_bits.copy()
-print(*k1r, sep='\n')
+pprint64(k1r)
+print()
 
 borislav = 'Борислав'
 borislav_key_bytes = borislav.encode("cp1251")
-borislav_key_bits = np.unpackbits(np.frombuffer(borislav_key_bytes, dtype=np.uint8)).reshape((8, 8))
+borislav_bits = np.unpackbits(np.frombuffer(borislav_key_bytes, dtype=np.uint8)).reshape((8, 8))
 print(f'Первое имя = {borislav}')
 for i in range(len(borislav_key_bytes)):
-    print(f'{borislav[i]} = {borislav_key_bits[i]}')
+    print(f'{borislav[i]} = {borislav_bits[i]}')
+print()
+borislav_key_bits = np.frombuffer(borislav_key_bytes, dtype=np.uint8)
 k2r = k1r ^ borislav_key_bits
 print(f'Ключ второго раунда K2r = K1r XOR Борислав')
-print(*k2r, sep='\n')
+pprint64(k2r)
+print()
 
 antonina = 'Антонина'
 antonina_key_bytes = antonina.encode("cp1251")
-antonina_key_bits = np.unpackbits(np.frombuffer(antonina_key_bytes, dtype=np.uint8)).reshape((8, 8))
+antonina_bits = np.unpackbits(np.frombuffer(antonina_key_bytes, dtype=np.uint8)).reshape((8, 8))
 print(f'Второе имя = {antonina}')
 for i in range(len(antonina_key_bytes)):
-    print(f'{antonina[i]} = {antonina_key_bits[i]}')
-
+    print(f'{antonina[i]} = {antonina_bits[i]}')
+print()
+antonina_key_bits  = np.frombuffer(antonina_key_bytes, dtype=np.uint8)
 k3r = k2r ^ antonina_key_bits
 print(f'Ключ третьего раунда K3r = K2r XOR Антонина')
-print(*k3r, sep='\n')
+pprint64(k3r)
+
 print('\n----------------\n')
 
 print('ШАГ 5')
@@ -151,14 +164,14 @@ def feistel(left: np.ndarray, right: np.ndarray, key: np.ndarray, caesar: int = 
     subkey = right.copy()
     # Перестановка комбинированным шифром правой части
     subkey += caesar
-    subkey[:] = subkey[[swap - 1]]
+    subkey[:] = subkey[swap - 1]
     # Сложение по модулю 2 ключа с результатом операций выше
     subkey[:] = subkey ^ key
     # Двойная перестановка комбинированным шифром правой части
     subkey += caesar
-    subkey[:] = subkey[[swap - 1]]
+    subkey[:] = subkey[swap - 1]
     subkey += caesar
-    subkey[:] = subkey[[swap - 1]]
+    subkey[:] = subkey[swap - 1]
     # Сложение по модулю 2 Левой части и subkey (результата функции шифрования)
     left[:] = subkey ^ left
 
@@ -167,47 +180,38 @@ variant = 'Информационность'
 variant_key_bits = np.frombuffer(variant.encode("cp1251"), dtype=np.uint8)
 print(f'Исходный текст для шифрования = {variant}')
 print(f'len={len(variant_key_bits) * 8} bits')
-
-variant_bits = np.unpackbits(np.frombuffer(variant_key_bits, dtype=np.uint8)).reshape((16, 8))
-print(*variant_bits, sep='\n')
+print()
+pprint128(variant_key_bits)
+print()
 
 print('ШИФРОВАНИЕ')
 ciphertext = variant_key_bits.copy()
 left = ciphertext[:8]
 right = ciphertext[8:]
 
-k1r = np.packbits(date_key_bits.reshape(8 * 8))
-k2r = np.packbits(borislav_key_bits.reshape(8 * 8))
-k3r = np.packbits(antonina_key_bits.reshape(8 * 8))
-
 print(f'Левая часть: {bytes(left).decode("cp1251")}')
 print(f'Правая часть: {bytes(right).decode("cp1251")}')
+print()
 
 feistel(left, right, k1r)
 print(f'Ключ первого раунда K1r')
-k1r_bits = np.unpackbits(np.frombuffer(k1r, dtype=np.uint8)).reshape((8, 8))
-print(*k1r_bits, sep='\n')
+pprint64(k1r)
 print(f'Результат первого раунда шифрования')
-ciphertext_bits = np.unpackbits(np.frombuffer(ciphertext, dtype=np.uint8)).reshape((16, 8))
-print(*ciphertext_bits, sep='\n')
+pprint128(ciphertext)
 print()
 
 feistel(right, left, k2r)
 print(f'Ключ второго раунда K2r')
-k2r_bits = np.unpackbits(np.frombuffer(k2r, dtype=np.uint8)).reshape((8, 8))
-print(*k2r_bits, sep='\n')
+pprint64(k2r)
 print(f'Результат второго раунда шифрования')
-ciphertext_bits = np.unpackbits(np.frombuffer(ciphertext, dtype=np.uint8)).reshape((16, 8))
-print(*ciphertext_bits, sep='\n')
+pprint128(ciphertext)
 print()
 
 feistel(left, right, k3r)
 print(f'Ключ третьего раунда K3r')
-k3r_bits = np.unpackbits(np.frombuffer(k3r, dtype=np.uint8)).reshape((8, 8))
-print(*k3r_bits, sep='\n')
+pprint64(k3r)
 print(f'Результат третьего раунда шифрования')
-ciphertext_bits = np.unpackbits(np.frombuffer(ciphertext, dtype=np.uint8)).reshape((16, 8))
-print(*ciphertext_bits, sep='\n')
+pprint128(ciphertext)
 print()
 print(f'Зашифрованный текст: {bytes(ciphertext).decode("cp1251")}')
 print()
@@ -217,29 +221,23 @@ print()
 
 feistel(left, right, k3r)
 print(f'Ключ третьего раунда K3r')
-k3r_bits = np.unpackbits(np.frombuffer(k3r, dtype=np.uint8)).reshape((8, 8))
-print(*k3r_bits, sep='\n')
+pprint64(k3r)
 print(f'Результат дешифрования с ключом третьего раунда')
-ciphertext_bits = np.unpackbits(np.frombuffer(ciphertext, dtype=np.uint8)).reshape((16, 8))
-print(*ciphertext_bits, sep='\n')
+pprint128(ciphertext)
 print()
 
 feistel(right, left, k2r)
 print(f'Ключ второго раунда K2r')
-k2r_bits = np.unpackbits(np.frombuffer(k2r, dtype=np.uint8)).reshape((8, 8))
-print(*k2r_bits, sep='\n')
+pprint64(k2r)
 print(f'Результат дешифрования с ключом второго раунда')
-ciphertext_bits = np.unpackbits(np.frombuffer(ciphertext, dtype=np.uint8)).reshape((16, 8))
-print(*ciphertext_bits, sep='\n')
+pprint128(ciphertext)
 print()
 
 feistel(left, right, k1r)
 print(f'Ключ первого раунда K1r')
-k1r_bits = np.unpackbits(np.frombuffer(k1r, dtype=np.uint8)).reshape((8, 8))
-print(*k1r_bits, sep='\n')
+pprint64(k1r)
 print(f'Результат дешифрования с ключом первого раунда')
-ciphertext_bits = np.unpackbits(np.frombuffer(ciphertext, dtype=np.uint8)).reshape((16, 8))
-print(*ciphertext_bits, sep='\n')
+pprint128(ciphertext)
 print()
 
 print(f'Дешифрованный текст: {bytes(ciphertext).decode("cp1251")}')
