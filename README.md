@@ -20,7 +20,7 @@
 | 3             |:heavy_check_mark:|
 | 4             |:heavy_check_mark:|
 | 5             |:heavy_check_mark:|
-| 8-9           |:x:               |
+| 8-9           |:heavy_check_mark:|
 
 Интеллектуальные информационные системы
 
